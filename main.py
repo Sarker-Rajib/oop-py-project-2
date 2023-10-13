@@ -29,7 +29,8 @@ def main():
             if option == 2:
                 account_type = 'Current'
             newac = Account(name, email, address, account_type)
-            print(newac.account_no)
+            print(f'Your account no is : {newac.account_no}')
+            print('Please Log-in to your account')
             print('---------------\n')
             continue
         elif x == 2:
