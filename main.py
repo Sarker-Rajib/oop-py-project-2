@@ -3,32 +3,101 @@ from admin import *
 from accounts import *
 
 def main():
-    ac1 = Account('myself', 'email', 'address', 'Savings')
-    ac2 = Account('you', 'email', 'address', 'Current')
-
-
-    ac1.deposit_money(100)
-    # ac1.withdraw_money(1)
-    # # ac1.check_balance()
-    ac1.get_loan(2000)
-    # # print(ac1.loan_amount, ac1.loan_count)
-    # # ac1.get_loan(2000)
-    # # print(ac1.loan_amount, ac1.loan_count)
-    # # ac1.get_loan(2000)
-    # # print(ac1.loan_amount, ac1.loan_count)
-
-    # # ac2.check_balance()
-    # ac1.transfer_money(87, 'CA102')
-    # # ac1.check_balance()
-    for th in ac1.transaction_history:
-        print(th)
-    # ac2.check_balance()
-
-    admin = Admin('s','a','ss','Savings')
-    # admin.delete_an_account('CA102')
+    ac1 = Account('Asif Akbar', 'asif09@email.com', 'Chattogram', 'Savings')
+    ac2 = Account('Antik', 'antu@email.com', 'Rajshahi', 'Current')
+    ac3 = Account('Apsara', 'apsara24@email.com', 'Dhaka', 'Savings')
+    admin = Admin('Admin')
     # admin.view_users()
-    admin.view_total_loan()
-    admin.view_balance()
+
+    while(True):
+        print('Please select an option Below')
+        print('1. Create an Account')
+        print('2. Login to your account')
+        print('3. Login as Admin')
+        print('4. Exit')
+
+        x = int(input('Give your input : '))
+        if 1 > x > 3:
+            print('Invalid Input')
+        elif x == 1:
+            name = input('Input Account Name : ')
+            email = input('Input email : ')
+            address = input('Input Address : ')
+            print('Input account type (1-savings/ 2-Current)')
+            option = int(input('Input 1 or 2 : '))
+            account_type = 'Savings'
+            if option == 2:
+                account_type = 'Current'
+            newac = Account(name, email, address, account_type)
+            print(newac.account_no)
+            print('---------------\n')
+            continue
+        elif x == 2:
+            print('Please Provide Your account No.')
+            ac_no = input('Your account No : ')
+            if ac_no in Bank.accounts:
+                user = Bank.accounts[ac_no]
+                user.deposit_money(500)
+        elif x == 3:
+            print()
+            passcode = int(input('Enter Your password : '))
+            if admin.password == passcode:
+                while(True):
+                    print('Please select an option Below')
+                    print('1. Create an Account')
+                    print('2. Delete an account')
+                    print('3. See user Lists')
+                    print('4. View balance')
+                    print('5. View Loan given')
+                    print('6. Turn of Loan produre')
+                    print('7. Log-out')
+
+                    Y = int(input('Provide your input : '))
+
+                    if Y == 1:
+                        name = input('Input Account Name : ')
+                        email = input('Input email : ')
+                        address = input('Input Address : ')
+                        print('Input account type (1-savings/ 2-Current)')
+                        option = int(input('Input 1 or 2 : '))
+                        account_type = 'Savings'
+                        if option == 2:
+                            account_type = 'Current'
+                        Account(name, email, address, account_type)
+                        print('---------------')
+                        continue
+                    elif Y == 2:
+                        inp = input('Please input the account no that you want to delete : ')
+                        admin.delete_an_account(inp)
+                        print('---------------')
+                    elif Y == 3:
+                        print('Users : ')
+                        admin.view_users()
+                        print('---------------')
+                    elif Y == 4:
+                        admin.view_balance()
+                        print('---------------')
+                    elif Y == 5:
+                        admin.view_total_loan()
+                        print('---------------')
+                    elif Y == 6:
+                        admin.turn_off_loan_process()
+                        print('---------------')
+                    elif Y == 7:
+                        break
+            else:
+                print('Wrong Paassword')
+                continue
+
+        elif x == 4:
+            break
+
+
+
+
+
+
+    
 
 
 if __name__ == '__main__':
