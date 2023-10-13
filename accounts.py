@@ -45,7 +45,7 @@ class Account:
     
     # check balance
     def check_balance(self):
-        print(f'Your (ac_no : {self.accont_no}) current balance is : {self.balance}$')
+        print(f'Your (ac_no : {self.account_no}) current balance is : {self.balance}$')
 
     # take loan
     def get_loan(self, amount):
@@ -62,6 +62,7 @@ class Account:
         if account_no in Bank.accounts:
             if 0 < amount <= self.balance:
                 Bank.accounts[account_no].balance += amount
+                Bank.accounts[account_no].transaction_history.append(f'Cash in => Amount : {amount}, from : {self.account_no} , Date/Time : {datetime.datetime.now()}')
                 self.balance -= amount
                 print(f'After Transfer of {amount}$, Your balance is {self.balance}$')
                 self.transaction_history.append(f'Transfer => Amount : {amount}, To Account : {account_no} , Date/Time : {datetime.datetime.now()}')
@@ -69,3 +70,8 @@ class Account:
                 print('The amount You entered is incorrect')
         else:
             print('Account not found')
+
+    # transaction history
+    def get_transaction_history(self):
+        for case in self.transaction_history:
+            print(case)

@@ -7,7 +7,7 @@ def main():
     ac2 = Account('Antik', 'antu@email.com', 'Rajshahi', 'Current')
     ac3 = Account('Apsara', 'apsara24@email.com', 'Dhaka', 'Savings')
     admin = Admin('Admin')
-    # admin.view_users()
+
 
     while(True):
         print('Please select an option Below')
@@ -37,7 +37,46 @@ def main():
             ac_no = input('Your account No : ')
             if ac_no in Bank.accounts:
                 user = Bank.accounts[ac_no]
-                user.deposit_money(500)
+                while(True):
+                    print('Please select an option Below')
+                    print('1. Deposit Money')
+                    print('2. Withdraw Money')
+                    print('3. Check Balance')
+                    print('4. View Transaction History')
+                    print('5. Take a Loan')
+                    print('6. Transfer Money')
+                    print('7. Log-out')
+                    print('-----###-----')
+                    Z = int(input('Provide your input : '))
+
+                    if Z == 1:
+                        money = int(input('Place amount : '))
+                        user.deposit_money(money)
+                    elif Z == 2:
+                        amount = int(input('Place amount : '))
+                        user.withdraw_money(amount)
+                        print('---------------')
+                    elif Z == 3:
+                        user.check_balance()
+                        print('---------------')
+                    elif Z == 4:
+                        user.get_transaction_history()
+                        print('---------------')
+                    elif Z == 5:
+                        amunt = int(input('Place loan amount : '))
+                        user.get_loan(amunt)
+                        print('---------------')
+                    elif Z == 6:
+                        acc_no = input('Input account no : ')
+                        amoun = int(input('Place transfer amount : '))
+                        user.transfer_money(amoun, acc_no)
+                        print('---------------')
+                    elif Z == 7:
+                        break
+            else:
+                print('Wrong Account Number Inserted')
+                break
+
         elif x == 3:
             print()
             passcode = int(input('Enter Your password : '))
@@ -91,14 +130,6 @@ def main():
 
         elif x == 4:
             break
-
-
-
-
-
-
-    
-
 
 if __name__ == '__main__':
     main()
