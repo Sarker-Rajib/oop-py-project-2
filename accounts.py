@@ -14,17 +14,18 @@ class Account:
 
         if account_type == 'Savings':
             x = len(Bank.accounts) + 1
-            self.accont_no = 'SA10' + str(x)
+            self.account_no = 'SA10' + str(x)
         else:
             x = len(Bank.accounts) + 1
-            self.accont_no = 'CA10' + str(x)
+            self.account_no = 'CA10' + str(x)
 
-        Bank.accounts[self.accont_no] = self
+        Bank.accounts[self.account_no] = self
     
     # deposit money
     def deposit_money(self, amount):
         if amount > 0:
             self.balance += amount
+            Bank.available_balence += amount
             self.transaction_history.append(f'Deposit => Amount : {amount}, Date/Time : {datetime.datetime.now()}')
             print(f'Deposit of amount : {amount}$ succesfully done. Your current balance is : {self.balance}$')
         else:
@@ -53,6 +54,8 @@ class Account:
         else:
             self.loan_amount += amount
             self.loan_count -= 1
+            Bank.loan_amount += amount
+            Bank.available_balence -= amount
 
     # transfer money
     def transfer_money(self, amount, account_no):
